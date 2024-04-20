@@ -2,10 +2,11 @@
 {
     public abstract class BoardLogicAPI
     {
-        public static BoardLogicAPI GetBoardLogic(float x, float y)
+        public static BoardLogicAPI GetBoardLogic()
         {
-            return new BoardLogic(x, y);
+            return new BoardLogic();
         }
+
         public abstract void CreateBall(float radius);
 
         public abstract void RemoveBall();
