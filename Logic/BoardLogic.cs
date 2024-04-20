@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Numerics;
 using Data;
 
 namespace Logic
@@ -23,21 +18,20 @@ namespace Logic
             float x = ((float)random.NextDouble() * (dimensions.X - radius)) + radius;
             float y = ((float)random.NextDouble() * (dimensions.Y - radius)) + radius;
 
-            float xVelocity = ((float)random.NextDouble() * 5 + 1) * (2 * random.Next(0,1) - 1);
-            float yVelocity = random.Next(-3, 3);
+            float xVelocity = ((float)random.NextDouble() * 5 + 1) * (2 * random.Next(0, 1) - 1);
+            float yVelocity = ((float)random.NextDouble() * 5 + 1) * (2 * random.Next(0, 1) - 1);
+
             balls.Add(BallAPI.GetBall(x, y, xVelocity, yVelocity, radius));
-
-
         }
+
         public override void RemoveBall()
         {
-            if (balls.Count > 0)
+            if (balls.Count > 0) 
             {
                 Random random = new();
 
                 balls.RemoveAt(random.Next(balls.Count));
             }
         }
-
     }
 }
