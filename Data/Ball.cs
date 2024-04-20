@@ -7,7 +7,6 @@ namespace Data
         private Vector2 coordinates;
         private Vector2 velocity;
         private readonly float radius;
-        private Vector2 maxCoordinates = new(300, 300);
 
         public Ball(float x, float y, float xVelocity, float yVelocity, float radius)
         {
@@ -16,13 +15,13 @@ namespace Data
             this.radius = radius;
         }
 
-        public override void Move(float xDifference, float yDifference)
+        public override void Move()
         {
-            float nextX = coordinates.X + radius + velocity.X;
-            float nextY = coordinates.Y + radius + velocity.Y;
+            float nextX = coordinates.X + velocity.X;
+            float nextY = coordinates.Y + velocity.Y;
 
-            bool nextXStepInBounds = nextX >= 0 && nextX <= maxCoordinates.X;
-            bool nextYStepInBounds = nextY >= 0 && nextY <= maxCoordinates.Y;
+            bool nextXStepInBounds = nextX - radius >= 0 && nextX + radius <= maxCoordinates.X;
+            bool nextYStepInBounds = nextY - radius >= 0 && nextY + radius <= maxCoordinates.Y;
 
             if (!nextXStepInBounds)
             {
@@ -57,12 +56,6 @@ namespace Data
         public override Vector2 GetMaxCoordinates()
         {
             return maxCoordinates;
-        }
-
-        public override void SetMaxCoordinates(float x, float y)
-        {
-            maxCoordinates.X = x;
-            maxCoordinates.Y = y;
         }
         #endregion getters & setters
     }

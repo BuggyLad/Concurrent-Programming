@@ -1,26 +1,16 @@
-﻿using System.Numerics;
+﻿using System.Collections.Immutable;
+using System.Collections.ObjectModel;
+using System.Numerics;
 
 namespace Data
 {
     internal class Board : BoardAPI
     {
-        private Vector2 dimensions;
         private readonly List<BallAPI> balls = [];
 
-        public Board(float x, float y)
+        public static Vector2 GetDimensions()
         {
-            dimensions = new Vector2(x, y);
-        }
-
-        public Vector2 GetDimensions()
-        {
-            return dimensions;
-        }
-
-        public void SetDimensions(float x, float y)
-        {
-            dimensions.X = x;
-            dimensions.Y = y;
+            return BallAPI.maxCoordinates;
         }
 
         public override BallAPI CreateBall(float x, float y, float xVelocity, float yVelocity, float radius)
@@ -39,6 +29,13 @@ namespace Data
 
                 balls.RemoveAt(random.Next(balls.Count));
             }
+        }
+
+        public override List<BallAPI> GetBalls()
+        {
+            ReadOnlyCollection<BallAPI> readOnlyBalls = balls.AsReadOnly();
+
+            return readOnlyBalls.ToList();
         }
     }
 }

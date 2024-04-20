@@ -4,12 +4,14 @@ namespace Data
 {
     public abstract class BallAPI
     {
+        public static readonly Vector2 maxCoordinates = new(300, 300);
+
         public static BallAPI GetBall(float x, float y, float xVelocity, float yVelocity, float radius)
         {
             return new Ball(x, y, xVelocity, yVelocity, radius);
         }
 
-        public abstract void Move(float xDifference, float yDifference);
+        public abstract void Move();
 
         #region getters & setters
         public abstract Vector2 GetCoordinates();
@@ -19,8 +21,6 @@ namespace Data
         public abstract float GetRadius();
 
         public abstract Vector2 GetMaxCoordinates();
-
-        public abstract void SetMaxCoordinates(float x, float y);
         #endregion getters & setters
     }
 }

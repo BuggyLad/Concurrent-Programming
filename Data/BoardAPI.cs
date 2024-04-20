@@ -2,13 +2,15 @@
 {
     public abstract class BoardAPI
     {
-        public static BoardAPI CreateBoard(float x, float y)
+        public static BoardAPI GetBoard()
         {
-            return new Board(x, y);
+            return new Board();
         }
 
         public abstract BallAPI CreateBall(float x, float y, float xVelocity, float yVelocity, float radius);
 
         public abstract void RemoveBall();
+
+        public abstract List<BallAPI> GetBalls();
     }
 }
