@@ -5,8 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Presentation.View"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="600" Width="450">
     <Grid>
+        <Border BorderThickness="3" BorderBrush="Black" Height="306" Width="306" >
+            <Canvas Width="300" Height="300" Background="LawnGreen"/>
+        </Border>
+        <Button Height = "50" Width = "50" Margin="140,454,260,80" FontSize="50">
+            <TextBlock Text="+" Margin="0,-16.4,0,0"/>
+        </Button>
+        <Button Height = "50" Width = "50" Margin="270,454,130,80" FontSize="50">
+            <TextBlock Text="-" Margin="0,-17,0,0"/>
+        </Button>
 
     </Grid>
+
 </Window>
