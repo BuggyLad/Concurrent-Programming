@@ -1,15 +1,16 @@
-﻿using System.ComponentModel;
-
-namespace Logic
+﻿namespace Logic
 {
     public abstract class LogicAbstractAPI
     {
-        public static LogicAbstractAPI GetAPI()
+        public static readonly float maxXCoordinate = Data.DataAbstractAPI.maxXCoordinate;
+        public static readonly float maxYCoordinate = Data.DataAbstractAPI.maxYCoordinate;
+
+        public static LogicAbstractAPI CreateAPI()
         {
             return new LogicAPI();
         }
 
-        public abstract void CreateBall(float radius);
+        public abstract void CreateBall(float radius, bool movementEnabled);
 
         public abstract List<BallLogicAbstractAPI> GetBalls();
 

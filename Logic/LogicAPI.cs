@@ -8,7 +8,7 @@ namespace Logic
     {
         private readonly List<BallLogicAbstractAPI> balls = [];
 
-        public override void CreateBall(float radius)
+        public override void CreateBall(float radius, bool movementEnabled)
         {
             Random random = new Random();
             float x = ((float)random.NextDouble() * (Data.DataAbstractAPI.maxXCoordinate - radius)) + radius;
@@ -18,7 +18,7 @@ namespace Logic
             float yVelocity = ((float)random.NextDouble() * 5 + 1) * (2 * random.Next(0, 1) - 1);
 
             Data.DataAbstractAPI api = Data.DataAbstractAPI.CreateAPI();
-            Data.BallDataAbstractAPI ball = api.CreateBall(x, y, xVelocity, yVelocity, radius, true);
+            Data.BallDataAbstractAPI ball = api.CreateBall(x, y, xVelocity, yVelocity, radius, movementEnabled);
             BallLogicAbstractAPI ballLogic = new BallLogicAPI(ball);
 
             balls.Add(ballLogic);

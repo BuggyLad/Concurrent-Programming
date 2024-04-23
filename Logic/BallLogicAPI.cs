@@ -51,7 +51,7 @@ namespace Logic
             }
             else if (eventArgs.PropertyName == nameof(ball.Y))
             {
-                RaisePropertyChanged(nameof(ball.X));
+                RaisePropertyChanged(nameof(ball.Y));
             }
         }
 
