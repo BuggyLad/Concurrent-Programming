@@ -9,4 +9,8 @@
     <RootNamespace>Presentation.$(MSBuildProjectName.Replace(" ", "_"))</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ViewModel\ViewModel.csproj" />
+  </ItemGroup>
+
 </Project>

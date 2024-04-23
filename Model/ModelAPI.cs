@@ -1,15 +1,13 @@
-﻿using Logic;
 using System.Collections.ObjectModel;
 
-namespace Presentation.Model
+﻿namespace Presentation.Model
 {
     internal class ModelAPI : ModelAbstractAPI
     {
-        private ObservableCollection<object> Balls = new ObservableCollection<object>();
-        private Logic.LogicAbstractAPI LogicAPI = Logic.LogicAbstractAPI.CreateAPI();
-        private float Radius = 5;
-        private float Diameter = 10;
+        private readonly ObservableCollection<object> Balls = [];
+        private readonly Logic.LogicAbstractAPI LogicAPI = Logic.LogicAbstractAPI.CreateAPI();
 
+        public override float Radius { get; protected set; } = 5;
 
         public override void CreateBall()
         {
@@ -31,8 +29,5 @@ namespace Presentation.Model
             }
             return Balls;
         }
-
-
-
     }
 }
