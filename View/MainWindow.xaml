@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Presentation.View"
+        xmlns:viewmodel="clr-namespace:Presentation.ViewModel;assembly=ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:MainViewModel}"
         mc:Ignorable="d"
         Title="MainWindow" Height="700" Width="600">
     <Grid>
@@ -11,20 +12,26 @@
             <ItemsControl ItemsSource="{Binding Balls}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <Canvas Width="auto" Height="auto" Background="LawnGreen"/>
+                        <Canvas Width="auto" Height="auto" Background="AntiqueWhite"/>
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Ellipse Width= "{Binding Radius}" Height="{Binding Radius}" Fill="Red" />
+                        <Ellipse Width= "{Binding Diameter}" Height="{Binding Diameter}" Fill="Red" />
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
+                <ItemsControl.ItemContainerStyle>
+                    <Style>
+                        <Setter Property="Canvas.Left" Value="{Binding X}" />
+                        <Setter Property="Canvas.Top" Value="{Binding Y}" />
+                    </Style>
+                </ItemsControl.ItemContainerStyle>
             </ItemsControl>
         </Border>
-        <Button Height = "50" Width = "50" Margin="170,384,280,150" FontSize="50" Command="{Binding AddBall}">
+        <Button Height = "50" Width = "50" Margin="140,454,260,80" FontSize="50" Command="{Binding CreateBallCommand}">
             <TextBlock Text="+" Margin="0,-16.4,0,0"/>
         </Button>
-        <Button Height = "50" Width = "50" Margin="295,384,155,150" FontSize="50" Command="{Binding DeleteBall}">
+        <Button Height = "50" Width = "50" Margin="270,454,130,80" FontSize="50" Command="{Binding RemoveBallCommand}">
             <TextBlock Text="-" Margin="0,-17,0,0"/>
         </Button>
 
