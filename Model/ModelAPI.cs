@@ -5,7 +5,7 @@ namespace Presentation.Model
 {
     internal class ModelAPI : ModelAbstractAPI
     {
-        private ObservableCollection<BallLogicAbstractAPI> Balls = new ObservableCollection<BallLogicAbstractAPI>();
+        private ObservableCollection<object> Balls = new ObservableCollection<object>();
         private Logic.LogicAbstractAPI LogicAPI = Logic.LogicAbstractAPI.CreateAPI();
         private float Radius = 5;
         private float Diameter = 10;
@@ -22,10 +22,10 @@ namespace Presentation.Model
             LogicAPI.RemoveBall();
 
         }
-        public override ObservableCollection<BallLogicAbstractAPI> GetBalls()
+        public override ObservableCollection<object> GetBalls()
         {
             Balls.Clear();
-            foreach (BallLogicAbstractAPI ball in LogicAPI.GetBalls())
+            foreach (object ball in LogicAPI.GetBalls())
             {
                 Balls.Add(ball);
             }

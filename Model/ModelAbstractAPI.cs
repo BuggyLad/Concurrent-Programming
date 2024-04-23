@@ -7,7 +7,7 @@ namespace Presentation.Model
     {
         public abstract void CreateBall();
         public abstract void RemoveBall();
-        public abstract ObservableCollection<BallLogicAbstractAPI> GetBalls();
+        public abstract ObservableCollection<object> GetBalls();
         public static ModelAbstractAPI CreateAPI()
         {
             return new ModelAPI();
