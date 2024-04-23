@@ -4,10 +4,12 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Presentation.View"
-        xmlns:viewmodel="clr-namespace:Presentation.ViewModel;assembly=ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:MainViewModel}"
-        mc:Ignorable="d"
+        xmlns:viewmodel="clr-namespace:Presentation.ViewModel;assembly=ViewModel"
         Title="MainWindow" Height="700" Width="600">
     <Grid>
+        <Grid.DataContext>
+            <viewmodel:MainViewModel/>
+        </Grid.DataContext>
         <Border BorderThickness="3" BorderBrush="Black" Height="306" Width="306" Margin="97,48,97,230">
             <ItemsControl ItemsSource="{Binding Balls}">
                 <ItemsControl.ItemsPanel>

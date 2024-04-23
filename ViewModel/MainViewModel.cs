@@ -36,6 +36,11 @@ namespace Presentation.ViewModel
             get => balls;
             set
             {
+                if (balls == value)
+                {
+                    return;
+                }
+
                 balls = value;
                 OnPropertyChanged();
             }
