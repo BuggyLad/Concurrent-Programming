@@ -1,18 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Logic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Presentation.Model
 {
     public abstract class ModelAbstractAPI
     {
         public abstract void CreateBall();
-        public abstract ObservableCollection<object> GetBalls();
-        public abstract int BallAmount { get; set; }
-
+        public abstract ObservableCollection<BallLogicAbstractAPI> GetBalls();
+        public abstract float Radius { get;}
+        public abstract float Diameter { get; }
         public static ModelAbstractAPI CreateAPI()
         {
             return new ModelAPI();
