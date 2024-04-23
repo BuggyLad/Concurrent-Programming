@@ -5,15 +5,32 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Presentation.View"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="450">
+        Title="MainWindow" Height="auto" Width="auto">
     <Grid>
-        <Border BorderThickness="3" BorderBrush="Black" Height="306" Width="306" >
-            <Canvas Width="300" Height="300" Background="LawnGreen"/>
+        <Border BorderThickness="3" BorderBrush="Black" Height="306" Width="306" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <ItemsControl ItemsSource="{Binding Balls}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <Canvas Width="300" Height="300" Background="LawnGreen" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Ellipse Width= "{Binding Radius}" Height="{Binding Radius}" Fill="Red" />
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+                <ItemsControl.ItemContainerStyle>
+                    <Style>
+                        <Setter Property="Canvas.Left" Value="{Binding X}" />
+                        <Setter Property="Canvas.Top" Value="{Binding Y}" />
+                    </Style>
+                </ItemsControl.ItemContainerStyle>
+            </ItemsControl>
         </Border>
-        <Button Height = "50" Width = "50" Margin="140,454,260,80" FontSize="50">
+        <Button Height = "50" Width = "50" Margin="140,454,260,80" FontSize="50" Command="{Binding AddBall}">
             <TextBlock Text="+" Margin="0,-16.4,0,0"/>
         </Button>
-        <Button Height = "50" Width = "50" Margin="270,454,130,80" FontSize="50">
+        <Button Height = "50" Width = "50" Margin="270,454,130,80" FontSize="50" Command="{Binding DeleteBall}">
             <TextBlock Text="-" Margin="0,-17,0,0"/>
         </Button>
 
