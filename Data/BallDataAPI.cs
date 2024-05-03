@@ -13,7 +13,7 @@ namespace Data
 
         public override event PropertyChangedEventHandler? PropertyChanged;
 
-        private readonly Task timer;
+        private readonly Timer timer;
 
         public override float X
         {
@@ -74,21 +74,25 @@ namespace Data
             YVelocity = yVelocity;
             Radius = radius;
 
-            timer = Task.Run(async () =>
+            if (movementEnabled)
             {
-                while (movementEnabled)
-                {
-                    await Move();
-                }
-            });
+                timer = new(Move, null, TimeSpan.Zero, TimeSpan.FromMilliseconds(20));
+            }
+            else
+            {
+                timer = new(Move, null, Timeout.Infinite, Timeout.Infinite);
+            }
         }
 
-        private async Task Move()
+        private void Move(object? state)
         {
+            if (state != null)
+            {
+                throw new ArgumentOutOfRangeException(nameof(state));
+            }
+
             X += XVelocity;
             Y += YVelocity;
-
-            await Task.Delay(20);
         }
 
         public override void Dispose()
