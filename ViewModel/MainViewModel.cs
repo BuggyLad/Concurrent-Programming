@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using Presentation.Model;
 using System.Windows.Input;
 
 namespace Presentation.ViewModel
@@ -8,12 +9,11 @@ namespace Presentation.ViewModel
     public class MainViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler? PropertyChanged;
-        private Model.ModelAbstractAPI modelAPI = Model.ModelAbstractAPI.CreateAPI();
+        private ModelAbstractAPI modelAPI = ModelAbstractAPI.CreateAPI();
         private ObservableCollection<object>? balls;
 
         public MainViewModel()
         {
-            Balls = modelAPI.GetBalls();
             CreateBallCommand = new RelayCommand(AddBall);
             RemoveBallCommand = new RelayCommand(SubstractBall);
         }

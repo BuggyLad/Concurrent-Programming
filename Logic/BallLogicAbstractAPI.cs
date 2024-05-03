@@ -1,20 +1,22 @@
-﻿using System.ComponentModel;
+﻿using Data;
+using System.ComponentModel;
 
 namespace Logic
 {
-    public abstract class BallLogicAbstractAPI
+    public abstract class BallLogicAbstractAPI : INotifyPropertyChanged, IDisposable
     {
-        public abstract float X { get; set; }
-        public abstract float Y { get; set; }
-        public abstract float XVelocity { get; set; }
-        public abstract float YVelocity { get; set; }
+        public abstract float Left { get; set; }
+        public abstract float Top { get; set; }
         public abstract float Radius { get; }
+        public abstract float Diameter { get; }
 
-        public abstract event PropertyChangedEventHandler? PositionChanged;
+        public abstract event PropertyChangedEventHandler? PropertyChanged;
 
-        public static BallLogicAbstractAPI CreateAPI(Data.BallDataAbstractAPI ball)
+        public static BallLogicAbstractAPI CreateAPI(BallDataAbstractAPI ball)
         {
             return new BallLogicAPI(ball);
         }
+
+        public abstract void Dispose();
     }
 }

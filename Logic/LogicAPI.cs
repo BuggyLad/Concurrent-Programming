@@ -1,28 +1,26 @@
-﻿using System.Collections.ObjectModel;
+﻿using Data;
 using System.ComponentModel;
-using System.Reactive.Linq;
 
 namespace Logic
 {
     internal class LogicAPI : LogicAbstractAPI
     {
-        private readonly List<BallLogicAbstractAPI> balls = [];
+        private readonly List<BallDataAbstractAPI> balls = [];
 
         public override void CreateBall(float radius, bool movementEnabled)
         {
-            Random random = new Random();
-            float x = ((float)random.NextDouble() * (Data.DataAbstractAPI.maxXCoordinate - radius)) + radius;
-            float y = ((float)random.NextDouble() * (Data.DataAbstractAPI.maxYCoordinate - radius)) + radius;
+            Random random = new();
+            float x = ((float)random.NextDouble() * (DataAbstractAPI.maxXCoordinate - radius)) + radius;
+            float y = ((float)random.NextDouble() * (DataAbstractAPI.maxYCoordinate - radius)) + radius;
 
-            float xVelocity = ((float)random.NextDouble() * 5 + 1) * (2 * random.Next(0, 1) - 1);
-            float yVelocity = ((float)random.NextDouble() * 5 + 1) * (2 * random.Next(0, 1) - 1);
+            float xVelocity = ((float)random.NextDouble() * 3 + 1) * (2 * random.Next(0, 1) - 1);
+            float yVelocity = ((float)random.NextDouble() * 3 + 1) * (2 * random.Next(0, 1) - 1);
 
-            Data.DataAbstractAPI api = Data.DataAbstractAPI.CreateAPI();
-            Data.BallDataAbstractAPI ball = api.CreateBall(x, y, xVelocity, yVelocity, radius, movementEnabled);
-            BallLogicAbstractAPI ballLogic = new BallLogicAPI(ball);
+            DataAbstractAPI api = DataAbstractAPI.CreateAPI();
+            BallDataAbstractAPI ball = api.CreateBall(x, y, xVelocity, yVelocity, radius, movementEnabled);
 
-            balls.Add(ballLogic);
-            ballLogic.PositionChanged += CollisionCheck;
+            balls.Add(ball);
+            ball.PropertyChanged += CollisionCheck;
         }
 
         public override void RemoveBall()
@@ -31,19 +29,22 @@ namespace Logic
             {
                 Random random = new();
 
-                balls.RemoveAt(random.Next(balls.Count));
+                int randomInt = random.Next(balls.Count);
+
+                balls[randomInt].Dispose();
+                balls.RemoveAt(randomInt);
             }
         }
 
         private void CollisionCheck(object sender, PropertyChangedEventArgs eventArgs)
         {
-            BallLogicAbstractAPI ball = (BallLogicAbstractAPI)sender;
+            BallDataAbstractAPI ball = (BallDataAbstractAPI)sender;
 
             float nextX = ball.X + ball.XVelocity;
             float nextY = ball.Y + ball.YVelocity;
 
-            bool nextXStepInBounds = nextX - ball.Radius >= 0 && nextX + ball.Radius <= Data.DataAbstractAPI.maxXCoordinate;
-            bool nextYStepInBounds = nextY - ball.Radius >= 0 && nextY + ball.Radius <= Data.DataAbstractAPI.maxYCoordinate;
+            bool nextXStepInBounds = nextX - ball.Radius >= 0 && nextX + ball.Radius <= DataAbstractAPI.maxXCoordinate;
+            bool nextYStepInBounds = nextY - ball.Radius >= 0 && nextY + ball.Radius <= DataAbstractAPI.maxYCoordinate;
 
             if (!nextXStepInBounds)
             {
@@ -58,9 +59,13 @@ namespace Logic
 
         public override List<BallLogicAbstractAPI> GetBalls()
         {
-            ReadOnlyCollection<BallLogicAbstractAPI> readOnlyBalls = balls.AsReadOnly();
+            List<BallLogicAbstractAPI> balls = [];
+            foreach (BallDataAbstractAPI ball in this.balls)
+            {
+                balls.Add(BallLogicAbstractAPI.CreateAPI(ball));
+            }
 
-            return readOnlyBalls.ToList();
+            return balls;
         }
     }
 }

@@ -1,22 +1,23 @@
-﻿using System.ComponentModel;
+﻿using Data;
+using System.ComponentModel;
 
 namespace Logic
 {
     internal class BallLogicAPI : BallLogicAbstractAPI
     {
-        private readonly Data.BallDataAbstractAPI ball;
+        private readonly BallDataAbstractAPI ball;
 
-        public override event PropertyChangedEventHandler? PositionChanged;
+        public override event PropertyChangedEventHandler? PropertyChanged;
 
-        public override float X
+        public override float Left
         {
-            get => ball.X;
+            get => ball.X - Radius;
             set => ball.X = value;
         }
 
-        public override float Y
+        public override float Top
         {
-            get => ball.Y;
+            get => ball.Y - Radius;
             set => ball.Y = value;
         }
 
@@ -25,39 +26,37 @@ namespace Logic
             get => ball.Radius;
         }
 
-        public override float XVelocity
+        public override float Diameter
         {
-            get => ball.XVelocity;
-            set => ball.XVelocity = value;
-        }
-        
-        public override float YVelocity
-        {
-            get => ball.YVelocity;
-            set => ball.YVelocity = value;
+            get => Radius * 2;
         }
 
-        public BallLogicAPI(Data.BallDataAbstractAPI ball)
+        public BallLogicAPI(BallDataAbstractAPI ball)
         {
             this.ball = ball;
-            PositionChanged += Update;
+            ball.PropertyChanged += Update;
         }
 
         private void Update(object? source, PropertyChangedEventArgs eventArgs)
         {
             if (eventArgs.PropertyName == nameof(ball.X))
             {
-                RaisePropertyChanged(nameof(ball.X));
+                OnPropertyChanged(nameof(Left));
             }
             else if (eventArgs.PropertyName == nameof(ball.Y))
             {
-                RaisePropertyChanged(nameof(ball.Y));
+                OnPropertyChanged(nameof(Top));
             }
         }
 
-        private void RaisePropertyChanged(string propertyName)
+        private void OnPropertyChanged(string propertyName)
         {
-            PositionChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        public override void Dispose()
+        {
+            ball.Dispose();
         }
     }
 }

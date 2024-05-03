@@ -10,11 +10,11 @@
         <Grid.DataContext>
             <viewmodel:MainViewModel/>
         </Grid.DataContext>
-        <Border BorderThickness="3" BorderBrush="Black" Height="306" Width="306" Margin="97,48,97,230">
+        <Border BorderThickness="3" BorderBrush="Black" Height="303" Width="303" Margin="97,48,97,230">
             <ItemsControl ItemsSource="{Binding Balls}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <Canvas Width="auto" Height="auto" Background="AntiqueWhite"/>
+                        <Canvas Width="297" Height="297" Background="AntiqueWhite"/>
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
@@ -24,8 +24,8 @@
                 </ItemsControl.ItemTemplate>
                 <ItemsControl.ItemContainerStyle>
                     <Style>
-                        <Setter Property="Canvas.Left" Value="{Binding X}" />
-                        <Setter Property="Canvas.Top" Value="{Binding Y}" />
+                        <Setter Property="Canvas.Left" Value="{Binding Left}" />
+                        <Setter Property="Canvas.Top" Value="{Binding Top}" />
                     </Style>
                 </ItemsControl.ItemContainerStyle>
             </ItemsControl>

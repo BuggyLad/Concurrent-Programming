@@ -11,7 +11,9 @@ namespace Data
         private float yVelocity;
         private float radius;
 
-        public override event EventHandler? PositionChanged;
+        public override event PropertyChangedEventHandler? PropertyChanged;
+
+        private readonly Task timer;
 
         public override float X
         {
@@ -23,7 +25,7 @@ namespace Data
                     return;
                 }
                 x = value;
-                OnPositionChanged();
+                OnPropertyChanged();
             }
         }
 
@@ -37,7 +39,7 @@ namespace Data
                     return;
                 }
                 y = value;
-                OnPositionChanged();
+                OnPropertyChanged();
             }
         }
 
@@ -59,9 +61,9 @@ namespace Data
             set => radius = value;
         }
 
-        private void OnPositionChanged()
+        private void OnPropertyChanged([CallerMemberName] string propertyName = "")
         {
-            PositionChanged?.Invoke(this, new EventArgs());
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         public BallDataAPI(float x, float y, float xVelocity, float yVelocity, float radius, bool movementEnabled)
@@ -72,18 +74,26 @@ namespace Data
             YVelocity = yVelocity;
             Radius = radius;
 
-            while(movementEnabled)
+            timer = Task.Run(async () =>
             {
-                Task.Run(Move);
-            }
+                while (movementEnabled)
+                {
+                    await Move();
+                }
+            });
         }
 
-        private async void Move()
+        private async Task Move()
         {
             X += XVelocity;
             Y += YVelocity;
 
-            await Task.Delay(100);
+            await Task.Delay(20);
+        }
+
+        public override void Dispose()
+        {
+            timer.Dispose();
         }
     }
 }

@@ -23,10 +23,10 @@ namespace LogicTest
             BallLogicAbstractAPI ball = balls[0];
 
             Assert.AreEqual(radius, ball.Radius);
-            Assert.IsTrue(ball.X >= radius);
-            Assert.IsTrue(ball.X <= LogicAbstractAPI.maxXCoordinate - radius);
-            Assert.IsTrue(ball.Y >= radius);
-            Assert.IsTrue(ball.Y <= LogicAbstractAPI.maxYCoordinate - radius);
+            Assert.IsTrue(ball.Left >= radius);
+            Assert.IsTrue(ball.Left <= LogicAbstractAPI.maxXCoordinate - radius);
+            Assert.IsTrue(ball.Top >= radius);
+            Assert.IsTrue(ball.Top <= LogicAbstractAPI.maxYCoordinate - radius);
             Assert.AreNotEqual(0, ball.XVelocity);
             Assert.AreNotEqual(0, ball.YVelocity);
         }
