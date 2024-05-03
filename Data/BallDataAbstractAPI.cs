@@ -10,7 +10,7 @@ namespace Data
         public abstract float YVelocity { get; set; }
         public abstract float Radius { get; set; }
 
-        public abstract event PropertyChangedEventHandler PropertyChanged;
+        public abstract event PropertyChangedEventHandler? PropertyChanged;
 
         public static BallDataAbstractAPI CreateAPI(float x, float y, float xVelocity, float yVelocity, float radius,
             bool movementEnabled)

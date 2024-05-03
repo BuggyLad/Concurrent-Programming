@@ -13,8 +13,8 @@ namespace Logic
             float x = ((float)random.NextDouble() * (DataAbstractAPI.maxXCoordinate - radius)) + radius;
             float y = ((float)random.NextDouble() * (DataAbstractAPI.maxYCoordinate - radius)) + radius;
 
-            float xVelocity = ((float)random.NextDouble() * 3 + 1) * (2 * random.Next(0, 1) - 1);
-            float yVelocity = ((float)random.NextDouble() * 3 + 1) * (2 * random.Next(0, 1) - 1);
+            float xVelocity = ((float)random.NextDouble() * 3 + 1) * (2 * random.Next(0, 2) - 1);
+            float yVelocity = ((float)random.NextDouble() * 3 + 1) * (2 * random.Next(0, 2) - 1);
 
             DataAbstractAPI api = DataAbstractAPI.CreateAPI();
             BallDataAbstractAPI ball = api.CreateBall(x, y, xVelocity, yVelocity, radius, movementEnabled);
@@ -36,24 +36,27 @@ namespace Logic
             }
         }
 
-        private void CollisionCheck(object sender, PropertyChangedEventArgs eventArgs)
+        private void CollisionCheck(object? sender, PropertyChangedEventArgs eventArgs)
         {
-            BallDataAbstractAPI ball = (BallDataAbstractAPI)sender;
-
-            float nextX = ball.X + ball.XVelocity;
-            float nextY = ball.Y + ball.YVelocity;
-
-            bool nextXStepInBounds = nextX - ball.Radius >= 0 && nextX + ball.Radius <= DataAbstractAPI.maxXCoordinate;
-            bool nextYStepInBounds = nextY - ball.Radius >= 0 && nextY + ball.Radius <= DataAbstractAPI.maxYCoordinate;
-
-            if (!nextXStepInBounds)
+            if (sender != null)
             {
-                ball.XVelocity = -ball.XVelocity;
-            }
+                BallDataAbstractAPI ball = (BallDataAbstractAPI)sender;
 
-            if (!nextYStepInBounds)
-            {
-                ball.YVelocity = -ball.YVelocity;
+                float nextX = ball.X + ball.XVelocity;
+                float nextY = ball.Y + ball.YVelocity;
+
+                bool nextXStepInBounds = nextX - ball.Radius >= 0 && nextX + ball.Radius <= DataAbstractAPI.maxXCoordinate;
+                bool nextYStepInBounds = nextY - ball.Radius >= 0 && nextY + ball.Radius <= DataAbstractAPI.maxYCoordinate;
+
+                if (!nextXStepInBounds)
+                {
+                    ball.XVelocity = -ball.XVelocity;
+                }
+
+                if (!nextYStepInBounds)
+                {
+                    ball.YVelocity = -ball.YVelocity;
+                }
             }
         }
 

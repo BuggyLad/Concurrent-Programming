@@ -9,7 +9,7 @@ namespace Presentation.ViewModel
     public class MainViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler? PropertyChanged;
-        private ModelAbstractAPI modelAPI = ModelAbstractAPI.CreateAPI();
+        private readonly ModelAbstractAPI modelAPI = ModelAbstractAPI.CreateAPI();
         private ObservableCollection<object>? balls;
 
         public MainViewModel()
