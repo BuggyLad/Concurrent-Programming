@@ -6,6 +6,14 @@ namespace LogicTest
     public class LogicAPITest
     {
         [TestMethod]
+        public void CreateAPITest()
+        {
+            LogicAbstractAPI api = LogicAbstractAPI.CreateAPI();
+
+            Assert.IsNotNull(api);
+        }
+
+        [TestMethod]
         public void CreateBallTest()
         {
             LogicAbstractAPI api = LogicAbstractAPI.CreateAPI();

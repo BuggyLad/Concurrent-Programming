@@ -1,7 +1,7 @@
-﻿using System.Collections.ObjectModel;
+﻿using Presentation.Model;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using Presentation.Model;
 using System.Windows.Input;
 
 namespace Presentation.ViewModel
