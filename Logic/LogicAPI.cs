@@ -45,16 +45,32 @@ namespace Logic
                 float nextX = ball.X + ball.XVelocity;
                 float nextY = ball.Y + ball.YVelocity;
 
-                bool nextXStepInBounds = nextX - ball.Radius >= 0 && nextX + ball.Radius <= DataAbstractAPI.maxXCoordinate;
-                bool nextYStepInBounds = nextY - ball.Radius >= 0 && nextY + ball.Radius <= DataAbstractAPI.maxYCoordinate;
+                bool nextXStepInLeftBounds = nextX - ball.Radius >= 0;
+                bool nextYStepInLeftBounds = nextY - ball.Radius >= 0;
+                bool nextXStepInRightBounds =nextX + ball.Radius <= DataAbstractAPI.maxXCoordinate;
+                bool nextYStepInRightBounds =nextY + ball.Radius <= DataAbstractAPI.maxYCoordinate;
 
-                if (!nextXStepInBounds)
+                if (!nextXStepInLeftBounds)
                 {
+                    ball.X = ball.Radius;
                     ball.XVelocity = -ball.XVelocity;
                 }
 
-                if (!nextYStepInBounds)
+                if (!nextYStepInLeftBounds)
                 {
+                    ball.Y = ball.Radius;
+                    ball.YVelocity = -ball.YVelocity;
+                }
+
+                if (!nextXStepInRightBounds)
+                {
+                    ball.X = DataAbstractAPI.maxXCoordinate - ball.Radius;
+                    ball.XVelocity = -ball.XVelocity;
+                }
+                
+                if (!nextYStepInRightBounds)
+                {
+                    ball.Y = DataAbstractAPI.maxYCoordinate - ball.Radius;
                     ball.YVelocity = -ball.YVelocity;
                 }
             }
