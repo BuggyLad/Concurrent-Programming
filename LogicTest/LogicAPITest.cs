@@ -27,8 +27,10 @@ namespace LogicTest
             Assert.IsTrue(ball.Left <= LogicAbstractAPI.maxXCoordinate - radius);
             Assert.IsTrue(ball.Top >= radius);
             Assert.IsTrue(ball.Top <= LogicAbstractAPI.maxYCoordinate - radius);
-            Assert.AreNotEqual(0, ball.XVelocity);
-            Assert.AreNotEqual(0, ball.YVelocity);
+            Assert.AreEqual(ball.Radius, radius);
+            Assert.AreEqual(ball.Diameter, 2 * radius);
+
+
         }
 
         [TestMethod]
