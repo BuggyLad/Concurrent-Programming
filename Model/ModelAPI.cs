@@ -8,18 +8,14 @@ namespace Presentation.Model
         private readonly ObservableCollection<object> Balls = [];
         private readonly LogicAbstractAPI LogicAPI = LogicAbstractAPI.CreateAPI();
 
-        public override float Radius { get; protected set; } = 5;
-
         public override void CreateBall()
         {
-            LogicAPI.CreateBall(Radius, true);
-            GetBalls();
+            LogicAPI.CreateBall(5, true);
         }
 
         public override void RemoveBall()
         {
             LogicAPI.RemoveBall();
-            GetBalls();
         }
 
         public override ObservableCollection<object> GetBalls()

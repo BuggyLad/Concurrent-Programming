@@ -23,14 +23,6 @@ namespace Presentation.ViewModel
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public float Diameter
-        {
-            get
-            {
-                return modelAPI.Radius * 2;
-            }
-        }
-
         public ObservableCollection<object>? Balls
         {
             get => balls;
